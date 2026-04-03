@@ -39,7 +39,7 @@ Money Manager is a lightweight desktop/web application built with NiceGUI that a
 Open a terminal in your home directory and type:
 ```bash
 git clone https://github.com/Lif28/MyFinance.git
-cd MyFinance
+cd MyFinance/MyFinance
 ```
 
 2. Create a virtual environment and install nicegui
