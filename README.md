@@ -150,3 +150,5 @@ This software is provided "as is" without warranty of any kind. The developer is
 MyFinance is designed to run locally or on a home server for continuous access.
 
 A recommended setup is running the application on a **Proxmox server** (or any Linux server), allowing you to access your finance dashboard from any device on your network.
+If you decide to do so, update the last line in main.py with your server’s IP.
+Save and restart the app to apply the change.
