@@ -6,7 +6,7 @@ import datetime
 
 INCOME_CATEGORIES = ["Salary", "Sales", "Investments", "Gifts", "Other"]
 EXPENSE_CATEGORIES = ["Sport", "School", "Shopping", "Food", "Health", "Transport", "Bills", "Other"]
-home = Path.home() / "MyFinance"
+home = Path.home() / "MyFinance" / "MyFinance"
 path_data = home/"data.json"
 icon = home/"icon.ico"
 
