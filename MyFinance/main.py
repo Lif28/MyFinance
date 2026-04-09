@@ -145,7 +145,8 @@ async def edit():
 
 
 
-ui.page_title('Money Manager')
+ui.page_title('MyFinance')
+ui.add_head_html('<style>body {background-color: #f5f5f5; }</style>')
 
 # Income / Expense
 with ui.row().style("margin: 50px auto 0; gap: 200px; display: flex;"):
