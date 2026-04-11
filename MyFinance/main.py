@@ -180,7 +180,7 @@ def set_date(period):
     expenses_chart.update()
 
 
-ui.page_title('Money Manager')
+ui.page_title('MyFinance')
 ui.add_head_html('<style>body {background-color: #f5f5f5; }</style>')
 
 # Income / Expense
