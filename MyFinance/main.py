@@ -184,7 +184,7 @@ ui.page_title('MyFinance')
 ui.add_head_html('<style>body {background-color: #f5f5f5; }</style>')
 
 # Income / Expense
-with ui.row().style("margin: 50px auto 0; gap: 200px; display: flex;"):
+with ui.row().style("margin: 50px auto 0; gap: 200px; display: flex; justify-content: center;"):
     with ui.card():
         ui.label("Income")
         income_category = ui.select(INCOME_CATEGORIES, value=INCOME_CATEGORIES[0])
@@ -214,7 +214,7 @@ with ui.row().style("margin: 50px auto 0; gap: 200px; display: flex;"):
     period = ui.select(TIME_CATEGORIES, value=TIME_CATEGORIES[0], on_change=set_date)
 
 # Charts
-with ui.row().style("margin: 50px auto 0; gap: 200px; display: flex;"):
+with ui.row().style("margin: 50px auto 0; gap: 200px; display: flex; justify-content: center;"):
     income_totals, expense_totals, total = get_totals(check_data(), date)
 
     income_chart = ui.echart({
