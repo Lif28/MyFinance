@@ -9,7 +9,7 @@ Money Manager is a lightweight desktop/web application built with NiceGUI that a
   <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/12870a7d-fd43-42e1-bfcc-407e5e05610b" /><br>
 
 
-  <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License">
+  <img src="https://img.shields.io/badge/License-MIT%202.0-blue.svg" alt="License">
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey.svg" alt="Platform">
   <img src="https://img.shields.io/badge/python-3.11+-blue.svg" alt="Python">
 </p>
@@ -17,6 +17,7 @@ Money Manager is a lightweight desktop/web application built with NiceGUI that a
 ## Features
 
 - **Income & expense tracking:** Easily add and categorize transactions
+- **Receipt upload functionality:** Upload your receips and add the expenses 
 - **Custom categories:** Separate categories for income and expenses
 - **Interactive charts:**
   - Income distribution (pie chart)
@@ -50,13 +51,13 @@ python3 -m venv MyFinance-venv
 On Windows:
 ```bash
 MyFinance-venv\Scripts\activate
-pip3 install nicegui
+pip3 install nicegui requests
 ```
 
 On Linux:
 ```bash
 source MyFinance-venv/bin/activate
-pip3 install nicegui
+pip3 install nicegui requests
 ```
 
 3. Run the application
@@ -66,8 +67,7 @@ python3 main.py
 
 ## Usage
 
-<img width="1899" height="950" alt="image" src="https://github.com/user-attachments/assets/3799c47e-0211-4ca8-b147-890572241a1a" />
-
+<img width="2832" height="1694" alt="usage" src="https://github.com/user-attachments/assets/6a8c99f0-158e-472d-b8b0-219cd426e396" />
 
 ### Adding Income
 
@@ -76,7 +76,8 @@ python3 main.py
 3. (Optional) Add notes
 4. Click Save
 
-<img width="1899" height="950" alt="image" src="https://github.com/user-attachments/assets/9cee8d2e-e508-4ecb-b8de-7008153fda93" />
+<img width="2832" height="1694" alt="income" src="https://github.com/user-attachments/assets/42a14e60-c8b1-4ba5-ad4c-2c94259c66c9" />
+
 
 ### Adding Expenses
 
@@ -85,15 +86,32 @@ python3 main.py
 3. (Optional) Add notes
 4. Click Save
 
-<img width="1899" height="950" alt="image" src="https://github.com/user-attachments/assets/29b24bb7-05ce-4599-a317-82d02b6834f5" />
+<img width="2832" height="1692" alt="expenses" src="https://github.com/user-attachments/assets/04be04f6-d773-4c05-b12f-504ec4410d4a" />
 
+### Uploading a receipt
+1. Press the '+' button on the upper-right corner
+2. Select the file of the receipt or take a photo (on android)
+3. Press the cloud button on the upper-right corner
+
+<img width="574" height="660" alt="Screenshot From 2026-06-12 20-53-19" src="https://github.com/user-attachments/assets/03eec963-69a0-4e9d-b062-29a6925c4e43" />
+<img width="574" height="660" alt="Screenshot From 2026-06-12 21-00-08" src="https://github.com/user-attachments/assets/f401febf-e357-45f1-bb06-07abd29219b9" />
+
+
+After the upload, a pop-up will notify you if the entry was added successfully. If not, try taking another picture of the receipt and make sure the 'TOTAL' is visible
+By default, this functionality adds an entry to the "Food" category, but you can change it later.
+
+**Privacy Note:**
+The receipt image is securely uploaded to the **OCR.space API** (`https://api.ocr.space/parse/image`) to automatically extract the text and total amount.
+
+According to OCR.space's <a href="https://ocr.space/privacypolicy">Privacy Policy</a>:
+- **No Data Retention:** All uploaded files and extracted text are **deleted immediately** after processing is complete. The service does not store, archive, or retain any of your data .
 
 ### Managing Entries
 
 - **Delete:** Select one or more rows and click Delete
 - **Edit:** Select a row and click Edit
 
-<img width="1906" height="354" alt="image" src="https://github.com/user-attachments/assets/2a960e4d-149d-4fde-9275-03a6d78024f9" />
+<img width="2832" height="554" alt="managing" src="https://github.com/user-attachments/assets/a154e761-eae4-43fa-9227-0613961af229" />
 
 
 ### Charts
@@ -123,6 +141,8 @@ Each entry has the following structure:
   "Date": "2026-04-01 16:45:00"
 }
 ```
+### API
+https://ocr.space/ocrapi
 
 ## Project Structure
 
@@ -132,6 +152,7 @@ MyFinance/
 ├── data.json           # Data storage (auto-created)
 ├── icon.png            # Default Image
 ├── icon.ico            # Icon
+├── receipt.jpg         # Copy of uploaded receipt (if it's uploaded)
 └── README.md           # Documentation
 ```
 
@@ -139,6 +160,7 @@ MyFinance/
 
 ```
 nicegui
+requests
 ```
 
 ## Disclaimer
