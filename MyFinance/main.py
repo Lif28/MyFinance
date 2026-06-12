@@ -198,7 +198,7 @@ async def read_receipt(image=None):
             files={"filename": f},
             data={
                 "apikey": "helloworld", 
-                "language": "usa",
+                "language": "auto",
                 "isTable": True
             }
         )
