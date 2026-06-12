@@ -26,6 +26,8 @@ import json
 import os
 from pathlib import Path
 import datetime
+import requests
+import re
 
 INCOME_CATEGORIES = ["Salary", "Sales", "Investments", "Gifts", "Other"]
 EXPENSE_CATEGORIES = ["Sport", "School", "Shopping", "Food", "Health", "Transport", "Bills", "Other"]
@@ -178,6 +180,47 @@ def set_date(period):
     income_chart.update()
     total_chart.update()
     expenses_chart.update()
+    
+async def read_receipt(image=None):
+    if not image: 
+        return
+
+    path = home/"receipt.jpg"
+
+    with open(path, "wb") as receipt:
+        receipt.write(await image.read())
+
+    url = "https://api.ocr.space/parse/image"
+
+    with open(path, "rb") as f:
+        r = requests.post(
+            url,
+            files={"filename": f},
+            data={
+                "apikey": "helloworld", 
+                "language": "ita",
+                "isTable": True
+            }
+        )
+    
+    # Text extracted thanks to the API
+    text = r.json()["ParsedResults"][0]["ParsedText"]
+
+    # Find Numbers
+    numbers = re.findall(r"\d+[.,]\d{2}", text)
+
+    if not numbers:
+        return ui.notify("Total not found, take another picture of the receipt and try again", type="negative")
+
+    # Takes the highest value, usually the total
+    total = max(float(n.replace(",", ".")) for n in numbers)
+
+    if total:
+        save(category="Food", amount=str(total), expense=True)
+        return ui.notify("Entry added!", type="positive"), ui.run_javascript('setTimeout(() => { location.reload(); }, 1000);')
+        
+    else:
+        return ui.notify("The Total is None, take another picture of the receipt and try again", type="negative")
 
 
 ui.page_title('MyFinance')
@@ -208,6 +251,11 @@ with ui.row().style("margin: 50px auto 0; gap: 200px; display: flex; justify-con
             .props('flat dense').bind_visibility_from(expense_notes, 'value')
 
         ui.button('Save', on_click=lambda: save(expense_category.value, expense_amount.value, expense_notes.value, True))
+
+    # To Upload receipts
+    with ui.card():
+        ui.label("Upload a Receipt")
+        ui.upload(on_upload=lambda e: read_receipt(image=e.file)).style('width: 186px; height: 235px')
 
 # Dropdown Button
 with ui.row().style("margin: 50px auto 0; gap: 200px; display: flex;"):
