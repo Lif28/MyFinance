@@ -63,15 +63,15 @@ def get_totals(data, date=None, period=None):
 
     return income, expenses, total
 
-def save(category, amount=None, notes=None, expense=False):
+def save(category, amount=None, notes=None, expense=False, date=None):
     # Checks
     if not amount.replace(".", "", 1).replace("-", "").isdigit():
         return ui.notify("The amount must be a digit!", type="warning")
 
     if expense and float(amount) > 0:
         amount = str(float(amount) * -1)
-
-    info = {"Category": category, "Amount": amount, "Notes": notes, "Date": str(datetime.datetime.now()).split(".")[0]}
+    if not date: date = str(datetime.datetime.now()).split(".")[0]
+    info = {"Category": category, "Amount": amount, "Notes": notes, "Date": date}
     if os.path.exists(path_data):
         with open(path_data, "r") as file:
             data = json.load(file)
@@ -134,7 +134,7 @@ async def edit():
             json.dump(data, file, indent=4)
 
         # Adds new entry
-        save(category, amount=amount, notes=notes, expense=mode)
+        save(category, amount=amount, notes=notes, expense=mode, date=row["Date"])
 
     # Edit
     with ui.dialog() as dialog:
@@ -297,6 +297,7 @@ with ui.row().style("margin: 50px auto 0; gap: 200px; display: flex; justify-con
 data = check_data()
 
 if data:
+    data = sorted(data, key=lambda x: x["Date"], reverse=False)
     table = {
         'columnDefs': [
             {'headerName': 'Category', 'field': 'Category'},
