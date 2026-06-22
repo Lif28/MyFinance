@@ -6,7 +6,9 @@ Money Manager is a lightweight desktop/web application built with NiceGUI that a
 
 <p align="center">
   <br>
-  <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/12870a7d-fd43-42e1-bfcc-407e5e05610b" /><br>
+  <img width="500" height="500" alt="icon" src="MyFinance/icon.png" />
+
+  <br>
 
 
   <img src="https://img.shields.io/badge/License-MIT%202.0-blue.svg" alt="License">
