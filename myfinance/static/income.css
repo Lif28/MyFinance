@@ -1,0 +1,183 @@
+.button-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+
+    background: #262626;
+    color: #f4f4f4;
+    
+    width: 100%;
+    padding: 14px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.button-submit:hover {
+    background: #4a4a4a;
+    transform: translateY(-1px);
+}
+
+.filters {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+
+    gap: 150px;
+
+    margin-bottom: 30px;
+}
+
+.filter-category {
+    width: 100%;
+    max-width: 250px;
+    padding: 15px;
+    background: #f4f4f4;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid #c2c2c2;
+    border-radius: 14px;
+
+}
+
+.filter-date {
+    width: 100%;
+    max-width: 350px;
+    padding: 15px;
+    background: #f4f4f4;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid #c2c2c2;
+    border-radius: 14px;
+
+}
+
+.filters form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.date-row {
+    display: flex;
+    gap: 10px;
+}
+
+.date-row div {
+    flex: 1;
+    min-width: 0;
+}
+
+select {
+    margin-bottom: 10px;
+
+    padding: 10px;
+    border: 1px solid #c2c2c2;
+    border-radius: 6px;
+    background-color: #f4f4f4;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.stats {
+    display: flex;
+    gap: 16px;
+
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    padding: 22px;
+    width: 100%;
+
+    background: #f4f4f4;
+
+    border: 1px solid #c2c2c2;
+    border-radius: 14px;
+}
+
+.stat-label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #5c5c5c;
+
+    font-size: 13px;
+}
+
+.stat-card strong {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+
+.charts {
+    display: block;
+    gap: 15px;
+}
+
+.chart-card {
+    width: 100%;
+
+    padding: 25px 25px 18px;
+
+    background: #f4f4f4;
+
+    border: 1px solid #c2c2c2;
+    border-radius: 14px;
+
+    margin-bottom: 50px;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .filters {
+        display: block;
+    }
+
+    .filter-date, .filter-category {
+        margin: auto auto 15px;
+    }
+
+
+
+    .date-row {
+        display: block;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .charts {
+        display:block;
+    }
+    .chart-card {
+        padding: 18px 12px;
+        width: 100%;
+    }
+
+    .stats {
+        display: block;
+    }
+    .stat-card {
+        margin-bottom: 10px;
+    }
+}

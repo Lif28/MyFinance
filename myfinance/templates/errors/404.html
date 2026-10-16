@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>404 - MyFinance</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='errors.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">   
+</head>
+
+<body>
+
+    <div class="container">
+
+        <span class="error-code">404</span>
+
+        <h1>Page not found</h1>
+
+        <p class="subtitle">
+            The page you're looking for doesn't exist or has been moved.
+        </p>
+
+        <a href="/" class="button">
+            Back to home
+        </a>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Table</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">  
+    <script>
+        function toggle(source) {
+            let checkboxes = document
+                .querySelectorAll('input[type="checkbox"]');
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i] != source)
+                    checkboxes[i].checked = source.checked;
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Header -->
+        <header class="topbar">
+            <a class="icon-button" href="/settings">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="MyFinance logo" class="logo">
+            </a>
+            <a href="/" class="button">Overview</a>
+            <a href="/income" class="button">Income</a>
+            <a href="/expenses" class="button">Expenses</a>
+            <a href="/table" class="button">Table</a>
+            <a href="/rules" class="button">Rules</a>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="content">
+            
+            <form method="POST" action="/table/update-entries">
+                <div class="buttons-div">
+                    <button type="submit" name="action" value="edit" class="button-update-entries">
+                        <img src="{{ url_for('static', filename='edit.png') }}" alt="edit" class="icon">
+                        Edit
+                    </button>
+                    <button type="submit" name="action" value="delete" class="button-update-entries">
+                        <img src="{{ url_for('static', filename='delete.png') }}" alt="delete" class="icon">
+                        Delete
+                    </button>
+                </div>
+
+                <table>
+                    <tr>
+                        <th><input type="checkbox" name="select" onclick=toggle(this)></th>
+                        <th>Type</th>
+                        <th>Category</th>
+                        <th>Value</th>
+                        <th>Date</th>
+                        <th>Notes</th>
+                        <th></th>
+                    </tr>
+
+                    {% for entry in entries %}
+                        <tr>
+
+                            <td><input type="checkbox" name="entry" value="{{ entry['id'] }}"></td>
+
+                            {% if entry['income'] %}
+                                <td>Income</td>
+                            {% else %}
+                                <td>Expense</td>
+                            {% endif %}
+
+                            <td>{{ entry['category'] }}</td>
+                            {% if entry['income'] %}
+                                <td>{{ +entry['value'] }}</td>
+                            {% else %}
+                                <td>{{ -entry['value'] }}</td>
+                            {% endif %}
+                            <td>{{ entry['date'] }}</td>
+                            <td>{{ entry['notes'] }}</td>
+                            <td>
+                                <span class="dot {{ 'income' if entry['income'] else 'expense' }}"
+                                    title="{{ 'Income' if entry['income'] else 'Expense' }}"></span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

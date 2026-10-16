@@ -1,0 +1,8 @@
+logs
+myfinance-venv
+*.tar.gz
+myfinance.txt
+__pycache__
+instance
+*db
+app

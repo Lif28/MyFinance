@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rules</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='rules.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">   
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Header -->
+        <header class="topbar">
+            <a class="icon-button" href="/settings">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="MyFinance logo" class="logo">
+            </a>
+            
+            <a href="/" class="button">Overview</a>
+            <a href="/income" class="button">Income</a>
+            <a href="/expenses" class="button">Expenses</a>
+            <a href="/table" class="button">Table</a>
+            <a href="/rules" class="button">Rules</a>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="content">
+            <form method="POST" action="/rules/edit-rule">
+                <div class="buttons-div">
+                    <a type="button" class="button-action" href="/rules/add-rule">
+                        <img src="{{ url_for('static', filename='add.png') }}" alt="add" class="icon">
+                        Add
+                    </a>
+        
+                    <button type="submit" name="action" value="edit" class="button-action">
+                        <img src="{{ url_for('static', filename='edit.png') }}" alt="edit" class="icon">
+                        Edit
+                    </button>
+
+                    <button type="submit" name="action" formaction="{{ url_for('rules.delete') }}" value="delete" class="button-action">
+                        <img src="{{ url_for('static', filename='delete.png') }}" alt="delete" class="icon">
+                        Delete
+                    </button>
+                </div>
+
+                {% for rule in rules %}
+                    <div class="rules">
+                        <input type="checkbox" name="id" value="{{ rule['id'] }}">
+
+                        <div class="name">
+                            <h3>{{ rule['name'] }}</h3>
+                            <details class="notes">
+                                <summary>{{ rule['notes'] }}</summary>
+                            </details>
+                        </div>
+
+                        <div class="field">
+                            <small>Frequency</small>
+                            {{ rule['frequency'] }}
+                        </div>
+
+                        <div class="field">
+                            <small>Next date</small>
+                            {{ rule['next_date'] }}
+                        </div>
+
+                        <div class="field">
+                            <small>Value</small>
+                            {{ rule['value'] }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+</body>
+</html>

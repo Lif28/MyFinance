@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit a rule</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='add-rule.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">   
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Header -->
+        <header class="topbar">
+            <a class="icon-button" href="/settings">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="MyFinance logo" class="logo">
+            </a>
+            <a href="/" class="button">Overview</a>
+            <a href="/income" class="button">Income</a>
+            <a href="/expenses" class="button">Expenses</a>
+            <a href="/table" class="button">Table</a>
+            <a href="/rules" class="button">Rules</a>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="content">
+
+            <!-- Rule -->
+
+            <div class="rules">
+                <div class="add-rule">
+                    <h3>Edit the rule</h3>
+                        <form method="POST" action="/rules/upsert-rule">
+
+                            <input type="hidden" name="upsert" value="edit">
+                            <input type="hidden" name="id" value="{{ rule['id'] }}">
+                            <input type="text" name="name" placeholder="Name" value="{{ rule['name'] }}" required>
+                            
+                            <select name="category">
+                                {% for category in income_cat %}
+                                    {% if category == rule['category'] %}
+                                        <option value="{{ category }}" selected>{{ category }}</option>
+                                    {% else %}
+                                        <option value="{{ category }}">{{ category }}</option>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% for category in expenses_cat %}
+                                    {% if category == rule['category'] %}
+                                        <option value="{{ category }}" selected>{{ category }}</option>
+                                    {% else %}
+                                        <option value="{{ category }}">{{ category }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>  
+
+                            <select name="frequency">
+                                {% for freq in frequencies %}
+                                    {% if freq == rule['frequency'] %}
+                                        <option value="{{ freq }}" selected>{{ freq }}</option>
+                                    {% else %}
+                                        <option value="{{ freq }}">{{ freq }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>  
+
+                            <input type="date" name="date" value="{{ rule['next_date'] }}" required>
+                            <input type="number" step="0.01" name="value" value="{{ rule['value'] }}" placeholder="Value" required>
+                            <input type="text" name="notes" value="{{ rule['notes'] }}" placeholder="Notes">
+
+                            <button type="submit" class="button-action">
+                                <img src="{{ url_for('static', filename='save.png') }}" alt="add" class="icon">
+                                Save
+                            </button>
+
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

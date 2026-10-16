@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MyFinance account deletion</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='delete.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">   
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Delete your account</h1>
+
+        <p class="subtitle">
+            Are you sure you want to delete your account?
+            This action cannot be undone.
+        </p>
+
+        <a href="/" class="button">
+            Back to home
+        </a>
+
+        <hr> 
+
+        <form method="POST" action="/settings/delete">
+            <label>Password</label>
+            <input type="password" name="password" required>
+            <button class="button delete">
+                <img src="{{ url_for('static', filename='delete.png') }}" class="icon">
+                Delete
+            </button>
+        </form>
+
+    </div>
+
+</body>
+</html>

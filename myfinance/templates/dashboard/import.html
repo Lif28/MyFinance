@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Import</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='settings.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">   
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Header -->
+        <header class="topbar">
+            <a class="icon-button" href="/settings">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="MyFinance logo" class="logo">
+            </a>
+
+            <a href="/" class="button">Overview</a>
+            <a href="/income" class="button">Income</a>
+            <a href="/expenses" class="button">Expenses</a>
+            <a href="/table" class="button">Table</a>
+            <a href="/rules" class="button">Rules</a>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="content">
+
+            <div class="settings">
+                <div class="settings-box">
+                    <h3>Upload a File</h3>
+                    <form method="POST" action="/settings/import" enctype="multipart/form-data">
+                        <input type="file" name="file" accept=".json">
+                        <button class="button-submit" type="submit">
+                            <img src="{{ url_for('static', filename='import.png') }}" class="icon">
+                            Upload
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

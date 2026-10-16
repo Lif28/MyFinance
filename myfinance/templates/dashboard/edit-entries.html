@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit entries</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='edit-entries.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">   
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Header -->
+        <header class="topbar">
+            <a class="icon-button" href="/settings">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="MyFinance logo" class="logo">
+            </a>
+            <a href="/" class="button">Overview</a>
+            <a href="/income" class="button">Income</a>
+            <a href="/expenses" class="button">Expenses</a>
+            <a href="/table" class="button">Table</a>
+            <a href="/rules" class="button">Rules</a>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="content">
+
+            <!-- Entries -->
+
+            <div class="entries">
+                <form method="POST" action="/table/save-entries">
+                    {% for entry in entries %}
+                    <div class="add-entry">
+                        <input type="hidden" name="entry_id" value="{{ entry['id'] }}">
+                        <input type="hidden" name="income" value="{{ entry['income'] }}">
+
+                        <select name="category">
+                            {% if entry['income'] %}
+                                {% for category in income_cat %}
+                                    {% if category == entry['category'] %}
+                                        <option value="{{ category }}" selected>{{ category }}</option>
+                                    {% else %}
+                                        <option value="{{ category }}">{{ category }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                {% for category in expenses_cat %}
+                                    {% if category == entry['category'] %}
+                                        <option value="{{ category }}" selected>{{ category }}</option>
+                                    {% else %}
+                                        <option value="{{ category }}">{{ category }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+
+                        <input type="date" name="date" value="{{ entry['date'] }}" required>
+                        <input type="number" step="0.01" name="value" value="{{ entry['value'] }}" required>
+                        <input type="text" name="notes" value="{{ entry['notes'] }}">
+                    </div>
+                    <hr>
+                    {% endfor %}                        
+                    <button type="submit" class="button-submit">
+                        <img src="{{ url_for('static', filename='save.png') }}" alt="save" class="icon">
+                        Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

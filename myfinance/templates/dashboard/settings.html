@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='settings.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">   
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Header -->
+        <header class="topbar">
+            <a class="icon-button" href="/settings">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="MyFinance logo" class="logo">
+            </a>
+
+            <a href="/" class="button">Overview</a>
+            <a href="/income" class="button">Income</a>
+            <a href="/expenses" class="button">Expenses</a>
+            <a href="/table" class="button">Table</a>
+            <a href="/rules" class="button">Rules</a>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="content">
+
+            <div class="settings">
+
+                <!-- Account -->
+                <div class="settings-box">
+                    <h3>Account</h3>
+                    <p>Username: <strong>{{ username }}</strong></p>
+                </div>
+
+                <!-- Password -->
+                <div class="settings-box">
+                    <h3>Change password</h3>
+                    <form method="POST" action="{{ url_for('settings.change_password') }}">
+                        <input type="password" name="old_password" placeholder="Current password" required>
+                        <input type="password" name="new_password" placeholder="New password" required>
+                        <input type="password" name="confirm_password" placeholder="Confirm new password" required>
+                        <button type="submit" class="button-submit">
+                            <img src="{{ url_for('static', filename='save.png') }}" class="icon">
+                            Save password
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Colors -->
+                <div class="settings-box">
+                    <h3>Colors</h3>
+                    <form method="POST" action="{{ url_for('settings.change_colors') }}">
+                        <label>Income Colors (separated by commas)</label>
+                        <input type="text" name="colors_income" value="{{ colors_income }}" required>
+
+                        <label>Expenses Colors (separated by commas)</label>
+                        <input type="text" name="colors_expenses" value="{{ colors_expenses }}" required>
+
+                        <button type="submit" class="button-submit">
+                            <img src="{{ url_for('static', filename='save.png') }}" class="icon">
+                            Save colors
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Categories -->
+                <div class="settings-box">
+                    <h3>Categories</h3>
+                    <form method="POST" action="{{ url_for('settings.change_categories') }}">
+                        <label>Income (separated by commas)</label>
+                        <input type="text" name="income_cat" value="{{ income_cat }}" required>
+
+                        <label>Expenses (separated by commas)</label>
+                        <input type="text" name="expenses_cat" value="{{ expenses_cat }}" required>
+
+                        <button type="submit" class="button-submit">
+                            <img src="{{ url_for('static', filename='save.png') }}" class="icon">
+                            Save categories
+                        </button>
+                    </form>
+                </div>  
+
+                <!-- Export or Import entries -->
+                <div class="settings-box">
+                    <form method="GET" action="{{ url_for('settings._import') }}">
+                        <a class="button-submit" href="/settings/export">
+                            <img src="{{ url_for('static', filename='export.png') }}" class="icon">
+                            Export
+                        </a>
+
+                        <button class="button-submit" type="submit">
+                            <img src="{{ url_for('static', filename='import.png') }}" class="icon">
+                            Import
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Logout & Account deletion -->
+                <div class="settings-box">
+                    <a href="{{ url_for('auth.logout') }}" class="button-submit logout">
+                        <img src="{{ url_for('static', filename='logout.png') }}" class="icon">
+                        Logout
+                    </a>
+
+                    <a href="{{ url_for('settings.delete') }}" class="button-submit logout">
+                        <img src="{{ url_for('static', filename='delete.png') }}" class="icon">
+                        Delete Account
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

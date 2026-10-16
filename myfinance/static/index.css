@@ -1,0 +1,164 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #d4d4d4;
+    color: #1c1c1c;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+
+    padding: 50px 40px;
+
+    text-align: center;
+
+    background: #f4f4f4;
+    border: 1px solid #c2c2c2;
+    border-radius: 20px;
+
+    box-shadow: 0 20px 50px rgba(28, 28, 28, 0.25);
+
+    animation: container-enter 0.7s ease-out both;
+}
+
+.logo {
+    width: 200px;
+    height: auto;
+
+    display: block;
+
+    margin: 0 auto 24px;
+
+    animation: logo-enter 0.7s ease-out 0.15s both;
+}
+
+h1 {
+    margin: 0;
+
+    font-size: 36px;
+    font-weight: 700;
+
+    animation: content-enter 0.6s ease-out 0.25s both;
+}
+
+.subtitle {
+    margin: 10px 0 32px;
+
+    color: #5c5c5c;
+    font-size: 16px;
+
+    animation: content-enter 0.6s ease-out 0.35s both;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    animation: content-enter 0.6s ease-out 0.45s both;
+}
+
+.button {
+    width: 100%;
+
+    padding: 14px 20px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.register {
+    background: #262626;
+    color: #f4f4f4;
+}
+
+.register:hover {
+    background: #4a4a4a;
+}
+
+.login {
+    background: #e4e4e4;
+    color: #1c1c1c;
+
+    border: 1px solid #c2c2c2;
+}
+
+.login:hover {
+    background: #c2c2c2;
+}
+
+
+/* Animations */
+
+@keyframes container-enter {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes logo-enter {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes content-enter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+    .container {
+        max-width: 350px;
+    }
+}

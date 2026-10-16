@@ -1,0 +1,8 @@
+myfinance-venv
+__pycache__
+instance
+logs
+myfinance.tar.gz
+myfinance.txt
+.git
+.gitignore

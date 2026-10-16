@@ -1,0 +1,177 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #e8e8e8;
+    color: #1c1c1c;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+
+    padding: 50px 40px;
+    
+
+    background: #f4f4f4;
+    border: 1px solid #c2c2c2;
+    border-radius: 20px;
+
+    box-shadow: 0 20px 50px rgba(28, 28, 28, 0.25);
+}
+
+h1 {
+    margin: 0;
+
+    text-align: center;
+
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin: 10px 0 32px;
+
+    text-align: center;
+
+    color: #5c5c5c;
+    font-size: 15px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-container label {
+    color: #1c1c1c;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-container input {
+    width: 100%;
+
+    margin-bottom: 12px;
+    padding: 13px 14px;
+
+    background: #e4e4e4;
+    border: 1px solid #c2c2c2;
+    color: #1c1c1c;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-container input:focus {
+    border-color: #3a3a3a;
+
+    box-shadow: 0 0 0 3px rgba(58, 58, 58, 0.2);
+}
+
+.button {
+    display: block;
+
+    background: #262626;
+    color: #f4f4f4;
+    
+    width: 100%;
+    padding: 14px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.button:hover {
+    background: #4a4a4a;
+    transform: translateY(-1px);
+}
+
+.auth-switch {
+    margin: 24px 0 0;
+
+    text-align: center;
+
+    color: #5c5c5c;
+    font-size: 14px;
+}
+
+.auth-switch a {
+    color: #1c1c1c;
+
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+.flash-messages {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(420px, calc(100% - 32px));
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    z-index: 1000;
+}
+
+.alert {
+    padding: 13px 18px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+
+    color: #a1202e;
+    background: rgba(220, 53, 69, 0.15);
+
+    border: 1px solid rgba(220, 53, 69, 0.3);
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(8px);
+}
+
+@media (max-width: 700px) {
+    .container {
+        max-width: 350px;
+    }
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+    
+    <!-- pyecharts -->
+    <script src="{{ url_for('static', filename='echarts.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">   
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Header -->
+        <header class="topbar">
+            <a class="icon-button" href="/settings">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="MyFinance logo" class="logo">
+            </a>
+
+            <a href="/" class="button">Overview</a>
+            <a href="/income" class="button">Income</a>
+            <a href="/expenses" class="button">Expenses</a>
+            <a href="/table" class="button">Table</a>
+            <a href="/rules" class="button">Rules</a>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="content">
+
+            <!-- Entries -->
+
+            <div class="entries">
+                <div class="add-entry">
+                    <h3>Income</h3>
+                        <form method="POST" action="/dashboard/add-entry">
+
+                            <input type="hidden" name="income" value="true">
+
+                            <select name="category">
+                                {% for category in income_cat %}
+                                    <option value="{{ category }}">{{ category }}</option>
+                                {% endfor %}
+                            </select>  
+
+                            <input type="date" name="date">
+                            <input type="number" step="0.01" name="value" placeholder="Value" required>
+                            <input type="text" name="notes" placeholder="Notes">
+
+                            <button type="submit" class="button-submit">
+                                <img src="{{ url_for('static', filename='add.png') }}" alt="add" class="icon">
+                                Add
+                            </button>
+
+                        </form>
+                    </div>
+
+
+                <div class="add-entry">
+                    <h3>Expenses</h3>
+
+                    <form method="POST" action="/dashboard/add-entry">
+
+                        <input type="hidden" name="income" value="false">
+                        <input type="hidden" name="redirect" value="dashboard-index">
+
+                        <select name="category">
+                            {% for category in expenses_cat %}
+                                <option value="{{ category }}">{{ category }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <input type="date" name="date">
+                        <input type="number" step="0.01" name="value" placeholder="Value" required>
+                        <input type="text" name="notes" placeholder="Notes">
+
+                        <button type="submit" class="button-submit">
+                            <img src="{{ url_for('static', filename='add.png') }}" alt="add" class="icon">
+                            Add
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+            <hr>
+            
+            
+
+
+            <!-- Statistics -->
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="stat-label">Income</span>
+                    <strong>{{ income }}</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label">Total</span>
+                    <strong>{{ total }}</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label">Expenses</span>
+                    <strong>{{ expenses }}</strong>
+                </div>
+
+            </div>
+
+            <!-- Income & Expenses -->
+            <div class="charts">
+                {% if income_chart %}
+                <div class="chart-card">
+                    {{ income_chart }}
+                </div>
+                {% endif %}
+
+
+                {% if expenses_chart %}
+                <div class="chart-card">
+                    {{ expenses_chart }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

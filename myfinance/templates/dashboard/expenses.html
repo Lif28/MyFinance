@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Expenses</title>
+    
+    <!-- pyecharts -->
+    <script src="{{ url_for('static', filename='echarts.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='income.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">   
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Header -->
+        <header class="topbar">
+            <a class="icon-button" href="/settings">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="MyFinance logo" class="logo">
+            </a>
+
+            <a href="/" class="button">Overview</a>
+            <a href="/income" class="button">Income</a>
+            <a href="/expenses" class="button">Expenses</a>
+            <a href="/table" class="button">Table</a>
+            <a href="/rules" class="button">Rules</a>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="content">
+
+            <!-- Filters-->
+            <div class="filters">
+                <div class="filter-category">
+                    <h3>Filter by Category</h3>
+                    <form method="GET" action="/expenses">
+                        <select name="category">
+                            <option value="all">All</option>
+                            {% for category in expenses_cat %}
+                                {% if category == selected_cat %}
+                                    <option value="{{ category }}" selected>{{ category }}</option>
+                                {% else %}
+                                    <option value="{{ category }}">{{ category }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>  
+                        <button class="button-submit">Filter</button>
+                    </form>
+                </div>
+
+                <div class="filter-date">
+                    <h3>Filter by Time</h3>
+                    
+                    <form method="GET" action="/expenses">
+                        <div class="date-row">
+                            <div>
+                                <label class="stat-label">Start date</label>
+                                <input name="start-date" value="{{ start_date }}" type="date">
+                            </div>
+                            <div>
+                                <label class="stat-label">End date</label>
+                                <input name="end-date" value="{{ end_date }}" type="date">
+                            </div>
+                        </div>
+                        <button class="button-submit">Filter</button>
+                    </form>
+                </div>
+
+
+            </div>
+
+            <!-- Statistics -->
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="stat-label">Expenses</span>
+                    <strong>{{ expenses }}</strong>
+                </div>
+            </div>
+
+            <!-- Income & Expenses -->
+            <div class="charts">
+                {% if bar_chart %}
+                <div class="chart-card">
+                    {{ bar_chart }}
+                </div>
+                {% endif %}
+
+                {% if line_chart %}
+                <div class="chart-card">
+                    {{ line_chart }}
+                </div>
+                {% endif %}
+
+
+                {% if pie_chart %}
+                <div class="chart-card">
+                    {{ pie_chart }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

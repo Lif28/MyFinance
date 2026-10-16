@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyFinance</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">   
+</head>
+
+<body>
+
+    <div class="container">
+
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="MyFinance logo" class="logo">
+        
+        <h1>MyFinance</h1>
+
+        <p class="subtitle">
+            Clean. Fast. Simple.
+        </p>
+
+        <div class="buttons">
+            <a href="/auth/register" class="button register">Register</a>
+            <a href="/auth/login" class="button login">Login</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

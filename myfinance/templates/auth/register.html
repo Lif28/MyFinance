@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">   
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Register</h1>
+
+        <p class="subtitle">
+            Create your MyFinance local account
+        </p>
+
+        <form class="form-container" action="/auth/register" method="POST">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" autocomplete="username" required>
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" autocomplete="new-password" required>
+        
+          <button type="submit" class="button">
+              Register
+          </button>
+        </form>
+
+        <p class="auth-switch">
+          Already have an account?
+          <a href="/auth/login">Login</a>
+        </p>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+    </div>
+</body>
+</html>

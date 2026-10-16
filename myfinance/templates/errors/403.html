@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>404 - MyFinance</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='errors.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">   
+</head>
+
+<body>
+
+    <div class="container">
+
+        <span class="error-code">403</span>
+        <h1>Forbidden</h1>
+        <p class="subtitle">You can't access this page.</p>
+        <a class="button" href="{{ url_for('index') }}">Back to home</a>
+    </div>
+
+    
+</body>
+</html>
