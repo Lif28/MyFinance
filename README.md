@@ -73,7 +73,7 @@ Replace 'your_ip' with the ip myfinance is running on
 
 ```bash
 docker create --name myfinance \
-  -e SECRET_KEY="...g" \
+  -e SECRET_KEY="..." \
   -p your_ip:5000:5000 \
   myfinance
 ```
@@ -88,9 +88,28 @@ docker start myfinance
 
 Go to `http://your_ip:5000` in your browser, create an account and log in.
 
+<img width="2854" height="1680" alt="Screenshot From 2026-10-16 10-09-22" src="https://github.com/user-attachments/assets/dc3f9af5-e133-4802-b339-aa4838113135" />
+
+
 The database is created automatically the first time the app starts.
 
 ## Usage
+
+### Register
+1. Click the register button
+2. enter a username and a password
+3. Press the button to register you local account
+4. You'll be redirected to a login page
+
+### Login
+1. Enter your credentials
+2. Press the button to login
+<br><br>
+
+<p align="center">
+  <img width="49%" height="540" alt="Screenshot From 2026-10-16 10-13-18" src="https://github.com/user-attachments/assets/f5c32044-c680-4bc6-bcb6-933396528abe" />
+  <img width="49%" height="540"  alt="Screenshot From 2026-10-16 10-13-26" src="https://github.com/user-attachments/assets/2b2b8867-118e-4221-b4e6-65f83a6e8cd9" />
+</p>
 
 ### Adding Income
 
@@ -108,6 +127,11 @@ The database is created automatically the first time the app starts.
 4. (Optional) Add notes
 5. Click Add
 
+<br><br>
+
+<img width="2816" height="1640" alt="Screenshot From 2026-10-16 10-19-35" src="https://github.com/user-attachments/assets/692fdcac-438f-4f6b-a41e-48142899f1bf" />
+
+
 ### Managing Entries
 
 Open the Table page to see all your entries.
@@ -115,9 +139,16 @@ Open the Table page to see all your entries.
 * **Delete:** Select one or more rows and click Delete
 * **Edit:** Select one or more rows, click Edit, change the values and click Save
 
+<img width="2816" height="1640" alt="Screenshot From 2026-10-16 10-21-01" src="https://github.com/user-attachments/assets/9a3555cf-bc6d-40b7-97b6-7260a77c2e8c" />
+
+
 ### Recurring Rules
 
 Open the Rules page and click Add. Choose a name, a category, a frequency, the date of the first entry and the amount. From that date on, the app adds a new entry every time the chosen period passes. You can edit or delete rules from the same page.
+
+<img width="2816" height="1640" alt="Screenshot From 2026-10-16 10-21-33" src="https://github.com/user-attachments/assets/d4907324-cabe-446f-aa21-3fee093564ec" />
+<img width="2816" height="1640" alt="image" src="https://github.com/user-attachments/assets/7bf0217f-40bb-4768-9a63-902bcf14d336" />
+
 
 ### Charts
 
@@ -128,9 +159,19 @@ The Overview page shows two charts:
 
 The Income and Expenses pages show three charts each (bar, line and pie), and you can filter them by category or by date.
 
+<img width="2816" height="1640" alt="image" src="https://github.com/user-attachments/assets/7f53e1c4-3af5-49cf-b5b0-1f5416fa1afa" />
+<img width="2816" height="1640" alt="image" src="https://github.com/user-attachments/assets/feadd4e8-3e39-4ae6-8503-2e0e1c15a401" />
+<img width="2816" height="1640" alt="image" src="https://github.com/user-attachments/assets/ffeaf56b-db17-40e0-8805-fcfea6b0601d" />
+
+
 ### Settings
 
 Click the logo in the top bar to open the settings. There you can change your password, your categories and your chart colors, export or import your entries, log out or delete your account.
+
+<p align="center">
+  <img width="49%" height="1504" alt="Screenshot From 2026-10-16 10-23-26" src="https://github.com/user-attachments/assets/0ba32c29-1b0c-43b1-bc53-86beb0f6a690" />
+  <img width="49%" height="1322" alt="image" src="https://github.com/user-attachments/assets/7509cffb-7894-4703-8511-0b742a35daf7" />
+</p>
 
 ## How It Works
 
